@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ASPNETMVCCRUD.Models.Domain
+﻿namespace ASPNETMVCCRUD.Models
 {
-    public class Employee
+    public class AddEmployeeViewModel
     {
-        [Key]
-        public int EmployeeId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public long Salary { get; set; }
