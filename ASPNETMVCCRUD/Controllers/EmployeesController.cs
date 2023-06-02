@@ -2,6 +2,7 @@
 using ASPNETMVCCRUD.Models;
 using ASPNETMVCCRUD.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASPNETMVCCRUD.Controllers
 {
@@ -12,6 +13,13 @@ namespace ASPNETMVCCRUD.Controllers
         public EmployeesController(MVCDemoDbContext mvcDemoContext)
         {
             this.mvcDemoContext = mvcDemoContext;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var employees = await mvcDemoContext.Employees.ToListAsync();
+            return View(employees);
         }
 
         [HttpGet]
