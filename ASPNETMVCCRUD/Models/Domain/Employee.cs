@@ -5,7 +5,7 @@ namespace ASPNETMVCCRUD.Models.Domain
     public class Employee
     {
         [Key]
-        public int EmployeeId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public long Salary { get; set; }

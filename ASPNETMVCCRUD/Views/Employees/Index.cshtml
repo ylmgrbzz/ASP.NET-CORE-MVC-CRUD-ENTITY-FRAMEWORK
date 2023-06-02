@@ -20,6 +20,7 @@
             <th>
                 Department
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +41,14 @@
                 </td>
                 <td>
                     @employee.Department
+                </td>
+@*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = employee.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = employee.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = employee.Id })
+</td>*@
+                <td>
+                    <a  href="Employees/View/@employee.Id" >View</a> |
                 </td>
             </tr>
         }
