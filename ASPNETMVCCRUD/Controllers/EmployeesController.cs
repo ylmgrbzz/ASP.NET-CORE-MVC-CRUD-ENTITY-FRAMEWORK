@@ -61,7 +61,7 @@ namespace ASPNETMVCCRUD.Controllers
                     DateOfBirth = employee.DateOfBirth,
                     Department = employee.Department
                 };
-                return RedirectToAction("Index");
+                return await Task.Run(() => View("view", viewEmployeeModel));
             }
             return RedirectToAction("Index");
         }
@@ -82,6 +82,18 @@ namespace ASPNETMVCCRUD.Controllers
                 return RedirectToAction("Index");
             }
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var employee = await mvcDemoContext.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            if (employee != null)
+            {
+                mvcDemoContext.Employees.Remove(employee);
+                await mvcDemoContext.SaveChangesAsync();
+            }
             return RedirectToAction("Index");
         }
     }
