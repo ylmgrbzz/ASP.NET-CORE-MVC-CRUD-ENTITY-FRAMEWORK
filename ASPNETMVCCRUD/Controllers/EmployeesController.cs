@@ -44,5 +44,17 @@ namespace ASPNETMVCCRUD.Controllers
             await mvcDemoContext.SaveChangesAsync();
             return RedirectToAction("Add");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> View(int id)
+        {
+            var employee = await mvcDemoContext.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return View(employee);
+        }
     }
 }
