@@ -61,10 +61,28 @@ namespace ASPNETMVCCRUD.Controllers
                     DateOfBirth = employee.DateOfBirth,
                     Department = employee.Department
                 };
-                return View(viewEmployeeModel);
+                return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> View(UpdateEmployeeViewModel updateEmployeeRequest)
+        {
+            var employee = await mvcDemoContext.Employees.FirstOrDefaultAsync(e => e.Id == updateEmployeeRequest.Id);
+            if (employee != null)
 
+            {
+                employee.Name = updateEmployeeRequest.Name;
+                employee.Email = updateEmployeeRequest.Email;
+                employee.Salary = updateEmployeeRequest.Salary;
+                employee.DateOfBirth = updateEmployeeRequest.DateOfBirth;
+                employee.Department = updateEmployeeRequest.Department;
+                mvcDemoContext.Employees.Update(employee);
+                await mvcDemoContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
