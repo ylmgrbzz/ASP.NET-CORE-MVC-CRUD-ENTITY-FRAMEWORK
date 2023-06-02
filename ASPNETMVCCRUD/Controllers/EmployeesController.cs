@@ -49,11 +49,15 @@ namespace ASPNETMVCCRUD.Controllers
         public async Task<IActionResult> View(int id)
         {
             var employee = await mvcDemoContext.Employees.FirstOrDefaultAsync(e => e.Id == id);
-            if (employee == null)
+            var viewEmployeeModel = new UpdateEmployeeViewModel()
             {
-                return NotFound();
-            }
-
+                Id = employee.Id,
+                Name = employee.Name,
+                Email = employee.Email,
+                Salary = employee.Salary,
+                DateOfBirth = employee.DateOfBirth,
+                Department = employee.Department
+            };
             return View(employee);
         }
     }
