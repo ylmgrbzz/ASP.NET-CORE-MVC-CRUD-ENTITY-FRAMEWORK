@@ -21,7 +21,7 @@ namespace ASPNETMVCCRUD.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddEmployeeViewModel addEmployeeRequest)
+        public async Task<IActionResult> Add(AddEmployeeViewModel addEmployeeRequest)
         {
             var employee = new Employee()
             {
@@ -32,9 +32,9 @@ namespace ASPNETMVCCRUD.Controllers
                 Department = addEmployeeRequest.Department
             };
 
-            mvcDemoContext.Employees.Add(employee);
-            mvcDemoContext.SaveChanges();
-            return View();
+            await mvcDemoContext.Employees.AddAsync(employee);
+            await mvcDemoContext.SaveChangesAsync();
+            return RedirectToAction("Add");
         }
     }
 }
